@@ -443,6 +443,47 @@ html.ready .hero .wrap>*:nth-child(4){animation-delay:.75s}
 @media(max-width:639px){.tile .trow .btn{margin-top:0}}
 .tile p{overflow-wrap:anywhere}
 @media(max-height:760px){.trail b{font-size:1.35rem}.trail a{padding:5px 0}.sheet{padding-top:84px}}
+
+/* ===== Islands page: video background, photo beside each island name ===== */
+.isl-video,.isl-veil{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.isl-video{object-fit:cover;background:#0B1222}
+.isl-veil{background:linear-gradient(180deg,rgba(11,18,34,.5),rgba(11,18,34,.3) 40%,rgba(11,18,34,.72))}
+#view-islands .phero{background:none}
+#view-islands .phero h1,#view-islands .phero p{text-shadow:0 2px 18px rgba(0,0,0,.55)}
+.isl-list{display:grid;gap:56px}
+.isl-row{display:grid;gap:22px;align-items:center}
+@media(min-width:900px){.isl-row{grid-template-columns:1.05fr 1fr;gap:48px}.isl-row:nth-child(even) .isl-img{order:2}}
+.isl-img{position:relative;aspect-ratio:4 / 3;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,rgba(14,165,233,.35),rgba(20,184,166,.3));border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 60px -28px rgba(0,0,0,.7)}
+.isl-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.isl-row:hover .isl-img img{transform:scale(1.04)}
+.isl-ph{position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.5)}
+.isl-ph .i{width:56px;height:56px;stroke-width:1.4}
+.isl-text{padding:32px;border-radius:28px;background:rgba(11,18,34,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);box-shadow:0 24px 60px -24px rgba(0,0,0,.6)}
+.isl-text p{color:#cbd5e1;margin:0}
+.isl-text p.isl-no{margin-bottom:6px;font-weight:700;letter-spacing:.2em;font-size:.78rem;color:#5eead4}
+.isl-text h2{font-size:clamp(2rem,5vw,2.8rem)}
+.isl-text p.isl-tag{margin:6px 0 14px;color:#38bdf8;font-weight:600;letter-spacing:.03em}
+.isl-facts{list-style:none;margin:16px 0 20px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.isl-facts li{display:inline-flex;align-items:center;gap:8px;padding:7px 12px 7px 10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);font-size:.85rem;color:#e2e8f0}
+.isl-facts .i{width:16px;height:16px;color:#5eead4}
+.isl-text p.isl-note{margin:0 0 18px;font-size:.8rem;color:#94a3b8}
+@media(max-width:639px){.isl-list{gap:34px}.isl-img{border-radius:22px;aspect-ratio:16 / 11}.isl-text{padding:20px;border-radius:22px}.isl-ph .i{width:44px;height:44px}}
+
+/* ===== Islands: crossfading video playlist + video frames ===== */
+.isl-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;background:#0B1222;overflow:hidden}
+.isl-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.isl-img img{font-size:0;color:transparent}
+.isl-fv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.isl-row:hover .isl-fv{transform:scale(1.04)}
+.isl-img.has-img .isl-fv{display:none}
+
+/* ===== Page headers use the hero photo ===== */
+.phero{position:relative;overflow:hidden}
+.phero::before{content:'';position:absolute;left:0;right:0;top:-22%;bottom:-22%;z-index:0;pointer-events:none;will-change:transform;transform:translate3d(0,var(--py,0px),0);background:linear-gradient(180deg,rgba(15,23,42,.62) 0%,rgba(15,23,42,.42) 50%,rgba(15,23,42,.72) 100%),url('images/hero_bg.jpeg') center/cover no-repeat}
+.phero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:46px;z-index:0;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(11,18,34,.55))}
+.phero>.wrap{position:relative;z-index:1}
+.phero h1,.phero p{text-shadow:0 2px 18px rgba(0,0,0,.45)}
+#view-islands .phero::before,#view-islands .phero::after{display:none}
 </style>
 </head>
 <body>
@@ -515,15 +556,7 @@ html.ready .hero .wrap>*:nth-child(4){animation-delay:.75s}
 <h2>Includes Fresh Island Buffet Lunch on La Digue at Fish Trap Restaurant!</h2><div style="margin-top:22px"><a class="btn btn-glass" href="#/fishtrap">Discover Fish Trap Restaurant</a></div></div></div></section><section class="block" style="padding-top:0"><div class="wrap"><div class="cta-band">
 <h2>Ready for your island day?</h2><p>Send us your date and group size and we’ll confirm availability on WhatsApp.</p>
 <a class="btn btn-cyan" href="#/book">Request a Booking</a></div></div></section></section>
-<section class="view" id="view-islands" data-route="islands" hidden><section class="phero"><div class="wrap"><h1>The Islands</h1><p>What you’ll see on your day across the Inner Islands of Seychelles.</p></div></section>
-<section class="block"><div class="wrap stack"><div class="feat"><div class="tile"><div class="em"><svg class="i" aria-hidden="true"><use href="#i-anchor"/></svg></div><h3>Mahé</h3><p>Your departure point. Every day trip starts at the Marine Charter Jetty.</p></div><div class="tile"><div class="em"><svg class="i" aria-hidden="true"><use href="#i-tree-palm"/></svg></div><h3>Praslin</h3><p>Home of the Coco de Mer at Glacis Noire and the beautiful Anse Lazio beach.</p></div><div class="tile"><div class="em"><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg></div><h3>La Digue</h3><p>Bikes, tortoises, vanilla and the famous Anse Source d’Argent.</p></div></div>
-<div class="prose">
-<h2>Praslin</h2><p>After a scenic 1h 15m boat ride, the Full-Day Excursion arrives in Praslin for a guided bus tour to Glacis Noire, where you can discover the Coco de Mer, followed by 1h 45m of beach time at Anse Lazio.</p>
-<h2>La Digue</h2><p>A short 20-minute boat transfer brings you to La Digue for a buffet lunch at Fish Trap Restaurant. Explore by bicycle or club car to Anse Source d’Argent, with a guided tortoise and vanilla plantation tour on the full-day package. A €13 or SCR 150 entrance fee per person is payable on site at Anse Source d’Argent.</p>
-<h2>Mahé</h2><p>All trips depart from and return to the Marine Charter Jetty on Mahé.</p>
-</div></div></section><section class="block" style="padding-top:0"><div class="wrap"><div class="cta-band">
-<h2>Ready for your island day?</h2><p>Send us your date and group size and we’ll confirm availability on WhatsApp.</p>
-<a class="btn btn-cyan" href="#/book">Request a Booking</a></div></div></section></section>
+<section class="view" id="view-islands" data-route="islands" hidden><div class="isl-bg"><video id="islVideo" class="isl-video" muted playsinline preload="auto" poster="images/hero_bg.jpeg" aria-hidden="true" tabindex="-1"></video><video id="islVideo2" class="isl-video" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video></div><div class="isl-veil"></div><section class="phero"><div class="wrap"><h1>The Islands</h1><p>Three islands, one day. Here is what waits on each of them.</p></div></section><section class="block"><div class="wrap isl-list"><article class="isl-row"><div class="isl-img" data-name="mahe"><span class="isl-ph"><svg class="i" aria-hidden="true"><use href="#i-anchor"/></svg></span><video class="isl-fv" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video><img alt="Mahé, Seychelles" loading="lazy" decoding="async" draggable="false"></div><div class="isl-text"><p class="isl-no">01</p><h2>Mahé</h2><p class="isl-tag">Where every day begins</p><p>Every excursion starts and ends at the Marine Charter Jetty on Mahé. From here the boat heads out across the water towards Praslin and La Digue.</p><ul class="isl-facts"><li><svg class="i" aria-hidden="true"><use href="#i-anchor"/></svg>Marine Charter Jetty</li><li><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>Departures from 07:00</li><li><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg>Back on Mahé by 16:50</li></ul><a class="btn btn-outline" href="#/excursions">See the excursions</a></div></article><article class="isl-row"><div class="isl-img" data-name="praslin"><span class="isl-ph"><svg class="i" aria-hidden="true"><use href="#i-tree-palm"/></svg></span><video class="isl-fv" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video><img alt="Praslin, Seychelles" loading="lazy" decoding="async" draggable="false"></div><div class="isl-text"><p class="isl-no">02</p><h2>Praslin</h2><p class="isl-tag">Coco de Mer and Anse Lazio</p><p>After a scenic boat ride you arrive on Praslin for a guided bus tour to Glacis Noire, home of the Coco de Mer, followed by time on the beautiful Anse Lazio beach.</p><ul class="isl-facts"><li><svg class="i" aria-hidden="true"><use href="#i-waves"/></svg>1h 15m scenic boat ride</li><li><svg class="i" aria-hidden="true"><use href="#i-tree-palm"/></svg>Glacis Noire and the Coco de Mer</li><li><svg class="i" aria-hidden="true"><use href="#i-map-pin"/></svg>1h 45m at Anse Lazio</li></ul><a class="btn btn-outline" href="#/excursions">View the full timeline</a></div></article><article class="isl-row"><div class="isl-img" data-name="la-digue"><span class="isl-ph"><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg></span><video class="isl-fv" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video><img alt="La Digue, Seychelles" loading="lazy" decoding="async" draggable="false"></div><div class="isl-text"><p class="isl-no">03</p><h2>La Digue</h2><p class="isl-tag">Bikes, beaches and a buffet lunch</p><p>A short boat transfer brings you to La Digue, where lunch is a buffet at Fish Trap Restaurant. Explore by bicycle or club car to the famous Anse Source d’Argent and, on the full-day trip, take a guided tortoise and vanilla plantation tour.</p><ul class="isl-facts"><li><svg class="i" aria-hidden="true"><use href="#i-utensils"/></svg>Buffet lunch at Fish Trap</li><li><svg class="i" aria-hidden="true"><use href="#i-bike"/></svg>Bicycle or club car</li><li><svg class="i" aria-hidden="true"><use href="#i-star"/></svg>Anse Source d’Argent</li></ul><p class="isl-note">Anse Source d’Argent entrance fee: €13 or SCR 150 per person, payable on site.</p><a class="btn btn-outline" href="#/fishtrap">See Fish Trap Restaurant</a></div></article></div></section><section class="block" style="padding-top:0"><div class="wrap"><div class="cta-band"><h2>Ready for your island day?</h2><p>Send us your date and group size and we’ll confirm availability on WhatsApp.</p><a class="btn btn-cyan" href="#/book">Request a Booking</a></div></div></section></section>
 <section class="view" id="view-gallery" data-route="gallery" hidden><section class="phero"><div class="wrap"><h1>Gallery</h1><p>The islands you’ll visit and the boat that takes you there.</p></div></section>
 <section class="block"><div class="wrap stack">
 <div><div class="ghead"><h2 class="gh">The Beaches</h2><p class="gsub">A taste of what waits on Praslin and La Digue. Swipe or use the arrows, and tap the front photo to enlarge it.</p></div><div class="dc" role="group" aria-roledescription="carousel" aria-label="The Beaches photos" tabindex="0"><div class="dcc" data-src="images/beach_view1.jpeg"><img src="images/beach_view1.jpeg" alt="Seychelles beach view 1" loading="lazy" decoding="async" draggable="false"></div><div class="dcc" data-src="images/beach_view2.jpeg"><img src="images/beach_view2.jpeg" alt="Seychelles beach view 2" loading="lazy" decoding="async" draggable="false"></div><div class="dcc" data-src="images/beach_view3.jpeg"><img src="images/beach_view3.jpeg" alt="Seychelles beach view 3" loading="lazy" decoding="async" draggable="false"></div></div></div>
@@ -868,9 +901,10 @@ html.ready .hero .wrap>*:nth-child(4){animation-delay:.75s}
   var hero = document.querySelector('.hero'), bg = document.getElementById('heroBg'), pt = false;
   function par() {
     pt = false;
-    var h = hero.offsetHeight; if (!h) return;
-    var y = clamp(window.pageYOffset * .2, 0, h * .22);
-    bg.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
+    var sy = window.pageYOffset, h = hero.offsetHeight;
+    if (h) bg.style.transform = 'translate3d(0,' + clamp(sy * .2, 0, h * .22).toFixed(1) + 'px,0)';
+    var ph = document.querySelector('.view:not([hidden]) .phero');
+    if (ph && ph.offsetHeight) ph.style.setProperty('--py', clamp(sy * .2, 0, ph.offsetHeight * .22).toFixed(1) + 'px');
   }
   if (hero && bg && !reduce) {
     window.addEventListener('scroll', function () { if (!pt) { pt = true; requestAnimationFrame(par); } }, { passive: true });
@@ -1145,6 +1179,101 @@ html.ready .hero .wrap>*:nth-child(4){animation-delay:.75s}
     if (ours) ours = false; else if (busy) return; else busy = true;   /* back / forward buttons arrive here too */
     reveal();
   });
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  var view = document.getElementById('view-islands'); if (!view) return;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches || (navigator.connection && navigator.connection.saveData);
+
+  /* Files in /videos. The second name in each pair is a fallback in case the file name uses different capitals. */
+  var CANDS = [['videos/Island1.mp4', 'videos/island1.mp4'], ['videos/island2.mp4', 'videos/Island2.mp4'], ['videos/island3.mp4', 'videos/Island3.mp4']];
+  var FADE = 1400;
+
+  /* island photos (optional): put them in /images as mahe, praslin, la-digue (.webp/.jpg/.jpeg/.png). With none, the island's video shows instead. */
+  [].forEach.call(view.querySelectorAll('.isl-img'), function (box) {
+    var img = box.querySelector('img'), name = box.getAttribute('data-name'), exts = ['webp', 'jpg', 'jpeg', 'png'], i = 0;
+    function next() { if (i >= exts.length) { img.style.display = 'none'; return; } img.src = 'images/' + name + '.' + exts[i++]; }
+    img.addEventListener('error', next);
+    img.addEventListener('load', function () { box.classList.add('has-img'); var fv = box.querySelector('.isl-fv'); if (fv) fv.pause(); });
+    next();
+  });
+
+  /* background: the three videos play one at a time; the next one fades in over the last second of the current one */
+  var A = document.getElementById('islVideo'), B = document.getElementById('islVideo2');
+  var idx = 0, cur = A, idle = B, started = false, switching = false;
+  [A, B].forEach(function (v) { v.muted = true; });
+  function setSrc(el, i) {
+    var c = CANDS[i], k = 0;
+    el.onerror = function () { if (++k < c.length) { el.src = c[k]; el.load(); } };
+    el.src = c[0]; el.load();
+  }
+  function fadeIn(el) {
+    el.style.transition = 'none'; el.style.opacity = '0'; el.style.zIndex = '2';
+    void el.offsetWidth;
+    el.style.transition = 'opacity ' + FADE + 'ms ease'; el.style.opacity = '1';
+  }
+  function swap() {
+    if (switching || still) return;
+    if (idle.readyState < 3) { idle.addEventListener('canplay', swap, { once: true }); return; }
+    switching = true;
+    var out = cur, inn = idle;
+    inn.currentTime = 0;
+    var p = inn.play(); if (p && p.catch) p.catch(function () {});
+    out.style.zIndex = '1';          /* the old video stays fully visible underneath while the new one fades in on top: no dark dip */
+    fadeIn(inn);
+    setTimeout(function () {
+      out.style.transition = 'none'; out.style.opacity = '0'; out.pause();
+      cur = inn; idle = out; idx = (idx + 1) % CANDS.length;
+      setSrc(idle, (idx + 1) % CANDS.length);
+      switching = false;
+    }, FADE + 80);
+  }
+  function watch(e) {
+    var v = e.target;
+    if (v !== cur || switching) return;
+    if (v.duration && v.duration - v.currentTime <= FADE / 1000 + .25) swap();
+  }
+  [A, B].forEach(function (v) {
+    v.addEventListener('timeupdate', watch);
+    v.addEventListener('ended', function (e) { if (e.target === cur) swap(); });
+  });
+  function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+
+  /* each island frame shows its own clip (Mahé = video 1, Praslin = 2, La Digue = 3), playing only while on screen */
+  var framesReady = false;
+  function frames() {
+    if (framesReady || still) return; framesReady = true;
+    var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (en) {
+      en.forEach(function (e) {
+        var fv = e.target.querySelector('.isl-fv');
+        if (!fv || e.target.classList.contains('has-img')) return;
+        if (e.isIntersecting) play(fv); else fv.pause();
+      });
+    }, { threshold: .35 }) : null;
+    [].forEach.call(view.querySelectorAll('.isl-img'), function (box, i) {
+      var fv = box.querySelector('.isl-fv'); if (!fv) return;
+      var c = CANDS[i % CANDS.length], k = 0;
+      fv.muted = true;
+      fv.onerror = function () { if (++k < c.length) fv.src = c[k]; };
+      fv.src = c[0];
+      if (io) io.observe(box);
+    });
+  }
+
+  function sync() {
+    if (view.hidden) { A.pause(); B.pause(); return; }
+    if (still) return;
+    if (!started) {
+      started = true;
+      setSrc(A, 0); A.style.opacity = '1'; A.style.zIndex = '2'; play(A);
+      setSrc(B, 1);
+    } else { play(cur); }
+    frames();
+  }
+  window.addEventListener('hashchange', function () { setTimeout(sync, 0); });
+  sync();
 })();
 </script>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
